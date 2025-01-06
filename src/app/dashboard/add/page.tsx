@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
     const router = useRouter();
@@ -8,7 +8,7 @@ export default function Page() {
     
     useEffect(() => {
         if(!localStorage.getItem('email') || !localStorage.getItem('password')){
-            router.push("/");
+          router.push("/");
         }
     }, [])
     
@@ -72,8 +72,4 @@ export default function Page() {
           </main>
         </div>
       );
-}
-
-function useEffect(arg0: () => void, arg1: never[]) {
-    throw new Error("Function not implemented.");
 }
