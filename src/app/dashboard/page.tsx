@@ -82,7 +82,7 @@ export default function Page() {
                   </div>
               </nav>
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:px-20">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:px-20">
                   {movies.map((item: IMovie) => (
                       <Card key={item.id} data={item} />
                   ))}
@@ -94,8 +94,8 @@ export default function Page() {
             </main>
           </div>
         :
-          <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#093545] bg-[url('/images/Vectors.png')] bg-contain bg-no-repeat bg-left-bottom">
-            <main className="flex flex-col flex-center gap-8 row-start-2 items-center justify-center h-full max-w-screen-xl mx-auto">
+          <div className="grid grid-rows-[1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#093545] bg-[url('/images/Vectors.png')] bg-contain bg-no-repeat bg-left-bottom">
+            <main className="flex flex-col flex-center gap-8 row-start-1 items-center justify-center h-full max-w-screen-xl mx-auto">
               <div className="w-full bg-transparent rounded-md text-center">
                 <h2 className="text-[32px] leading-[40px] sm:text-[48px] sm:leading-[56px] mb-[40px] text-center text-white font-montserrat-bold">Your movie list is empty</h2>
                 <div>
