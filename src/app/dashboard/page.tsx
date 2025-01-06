@@ -1,14 +1,14 @@
 "use client"
 import Card from "@/components/card";
 import Pagination from "@/components/pagenation";
-import { Movie } from "@/types";
+import { IMovie } from "@/types";
 import { useEffect, useState } from "react";
 
 export default function Page() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(4);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [data, setData] = useState<Movie[]>([
+  const [movies, setMovies] = useState<IMovie[]>([
       {
           id: 1,
           image: 'movie1',
@@ -19,48 +19,48 @@ export default function Page() {
           id: 2,
           image: 'movie2',
           title: 'Movie 2',
-          publish_year: 2019
+          publish_year: 2020
       },
       {
           id: 3,
           image: 'movie3',
           title: 'Movie 3',
-          publish_year: 2019
+          publish_year: 2021
       },
       {
           id: 4,
           image: 'movie4',
           title: 'Movie 4',
-          publish_year: 2019
+          publish_year: 2022
       },
       {
           id: 5,
           image: 'movie5',
           title: 'Movie 5',
-          publish_year: 2019
+          publish_year: 2023
       },
       {
           id: 6,
           image: 'movie6',
           title: 'Movie 6',
-          publish_year: 2019
+          publish_year: 2024
       },
       {
           id: 7,
           image: 'movie7',
           title: 'Movie 7',
-          publish_year: 2019
+          publish_year: 2025
       }
   ]);
 
   useEffect(() => {
-      if(data != null){
-          setTotalPages(Math.ceil(data.length / perPage))
-      }
-  }, data)
+    if(movies != null && movies.length > 0){
+      setTotalPages(Math.ceil(movies.length / perPage))
+    }
+  }, movies)
 
     return (
-      (data && data.length > 0) ?
+      (movies && movies.length > 0) ?
         <div className="grid grid-rows-[1fr_20px] items-center justify-items-center min-h-screen p-6 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#093545] bg-[url('/images/Vectors.png')] bg-contain bg-no-repeat bg-left-bottom">
             <main className="container flex flex-col flex-top gap-20 row-start-1 items-top justify-top h-full max-w-screen-xl mx-auto">
               <nav className="w-full flex flex-row items-center justify-between py-10 lg:px-20">
@@ -76,14 +76,14 @@ export default function Page() {
                   
                   {/* Logout Button */}
                   <div>
-                      <a href="/" className="bg-transparent text-white py-2 rounded-md text-sm font-semibold hover:bg-[#224957] flex items-center gap-2">
+                      <a href="/" className="bg-transparent text-white py-2 rounded-md text-sm font-montserrat-bold flex items-center gap-2">
                           <span className="hidden sm:block">Logout</span> <img src="/images/logout_black_24dp.png" alt="Logo" className="h-8" />
                       </a>
                   </div>
               </nav>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:px-20">
-                  {data && data.map((item: Movie) => (
+                  {movies.map((item: IMovie) => (
                       <Card key={item.id} data={item} />
                   ))}
               </div>
