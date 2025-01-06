@@ -15,4 +15,10 @@ export default {
     },
   },
   plugins: [],
+  corePlugins: {
+    ringWidth: false, // Disables ring utilities like ring-2
+    ringColor: false, // Disables ring color utilities
+    ringOffsetWidth: false, // Disables ring offset utilities
+    ringOffsetColor: false, // Disables ring offset color utilities
+  },
 } satisfies Config;
