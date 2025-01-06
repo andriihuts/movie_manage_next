@@ -1,10 +1,11 @@
 "use client"
 import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [error, setError] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
@@ -12,10 +13,27 @@ export default function Home() {
   
   const login = (e: any) => {
     e.preventDefault()
-    if(email != '' && password != ''){
+    if(email !== 'admin@gmail.com' && password !== 'admin123'){
+      setEmailError(true)
+      setPasswordError(true)
+    } else if(email === 'admin@gmail.com' && password !== 'admin123') {
+      setEmailError(false)
+      setPasswordError(true)
+    } else if(email !== 'admin@gmail.com' && password === 'admin123') {
+      setEmailError(true)
+      setPasswordError(false)
+    } else {
+      localStorage.setItem('email', email)
+      localStorage.setItem('password', password)
       router.push("/dashboard");
     }
   }
+
+  useEffect(() => {
+    if(localStorage.getItem('email') && localStorage.getItem('password')){
+      router.push("/dashboard");
+    }
+  }, [])
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#093545] bg-[url('/images/Vectors.png')] bg-contain bg-no-repeat bg-left-bottom">
@@ -32,7 +50,7 @@ export default function Home() {
                 name="email"
                 autoComplete="off"
                 required
-                className={`w-full sm:w-[300px] px-4 py-2 border rounded-md mt-2 text-white focus:outline-none focus:ring-2 font-montserrat ${error ? 'bg-white border-[#EB5757]': 'bg-[#224957] border-[#224957]'} focus:bg-white focus:text-[#224957] focus:shadow-none`}
+                className={`w-full sm:w-[300px] px-4 py-2 border rounded-md mt-2 focus:outline-none focus:ring-2 font-montserrat ${emailError ? 'text-[#224957] bg-white border-[#EB5757]': 'text-white bg-[#224957] border-[#224957]'} focus:bg-white focus:text-[#224957] focus:shadow-none`}
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -46,7 +64,7 @@ export default function Home() {
                 name="password"
                 autoComplete="off"
                 required
-                className={`w-full sm:w-[300px] px-4 py-2 border rounded-md mt-2 text-white focus:outline-none focus:ring-2 font-montserrat  ${error ? 'bg-white border-[#EB5757]': 'bg-[#224957] border-[#224957]'} focus:bg-white focus:text-[#224957] focus:shadow-none`}
+                className={`w-full sm:w-[300px] px-4 py-2 border rounded-md mt-2 focus:outline-none focus:ring-2 font-montserrat  ${passwordError ? 'text-[#224957] bg-white border-[#EB5757]': 'text-white bg-[#224957] border-[#224957]'} focus:bg-white focus:text-[#224957] focus:shadow-none`}
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               />

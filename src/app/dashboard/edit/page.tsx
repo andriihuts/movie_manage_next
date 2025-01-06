@@ -1,8 +1,17 @@
 "use client"
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Page() {
+  const router = useRouter();
   const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if(!localStorage.getItem('email') || !localStorage.getItem('password')){
+      router.push("/");
+    }
+  }, [])
+  
   return (
       <div className="grid grid-rows-[1fr_20px] items-center justify-items-center min-h-screen p-6 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#093545] bg-[url('/images/Vectors.png')] bg-contain bg-no-repeat bg-left-bottom">
         <main className="container flex flex-col flex-top gap-20 row-start-1 items-top justify-top h-full max-w-screen-xl mx-auto">
