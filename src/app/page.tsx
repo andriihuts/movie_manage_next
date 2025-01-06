@@ -12,8 +12,9 @@ export default function Home() {
   
   const login = (e: any) => {
     e.preventDefault()
-    console.log({email, password})
-    router.push("/dashboard");
+    if(email != '' && password != ''){
+      router.push("/dashboard");
+    }
   }
 
   return (
